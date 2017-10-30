@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<link rel="stylesheet" type="text/css" href="style/index.css">
+</head>
+<body>
+<div id="result"></div>
+<div id='div'>
+        <ul id='ul'>
+            <li>首页</li>
+            <li>上一页</li>
+            <li id="page"></li>
+            <li id="page"></li>
+            <li id="page"></li>
+            <li>下一页</li>
+            <li>尾页</li>
+        </ul>
+        <input type="type" id="type">
+        <input type="button" value="跳转" id="btn">
+</div>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    var url = "http://123.207.11.231:8080/SCIEManagement/article/manage";
+    $.ajax({
+        type: "post",
+        url: url,
+        data: {
+            "page":1,
+            "row":10
+        },
+        dataType: "json",
+        success: function (data) {
+        	console.log(data);
+        	$.each(data.articles.article, function(i, item) {
+            $("#result").append(
+                    "<div>" + item.title + "</div>" 
+                   );
+        });
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("请求失败！");
+        }
+    });
+</script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
